@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+</head>
+<body>
+
+<br><br>
+<h2 style="color:green">Add product</h2>
+<br><br>
+
+<form class="form-horizontal" role="form" action="#" th:action="@{/product_result}" th:object="${product}" method="post">
+
+	<div class="form-group">
+		<label for="oem" class="col-sm-2 control-label"> OEM: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{oem}" class="form-control" id="oem" placeholder="Enter oem"/></div>
+		<label style="color:red" th:if="${#fields.hasErrors('oem')}" th:errors="*{oem}">OEM Error</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="product" class="col-sm-2 control-label"> Name: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter name"/></div>
+		<label style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="region" class="col-sm-2 control-label"> Region: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{region}" class="form-control" id="region" placeholder="Enter region"/></div>
+	</div>
+	
+	<div class="form-group">
+		<label for="operator" class="col-sm-2 control-label"> Operator: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{operator}" class="form-control" id="operator" placeholder="Enter operator"/></div>
+	</div>
+	
+	<div class="form-group">
+		<div>
+			<button type="submit" class="btn btn-primary" id="btn">Submit</button>
+			<input type="reset" class="btn btn-warning" value="Reset" />
+		</div>
+	</div>
+	
+</form>
+<a href="/home">Show all products</a>
+</body>
+</html>

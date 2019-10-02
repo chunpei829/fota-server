@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+</head>
+<body>
+
+<br><br>
+<h2 style="color:green">Add version</h2>
+<br><br>
+
+<form class="form-horizontal" role="form" action="#" th:action="@{/product/__${version.productId}__/version_result}" th:object="${version}" method="post">
+
+	<div class="form-group">
+		<label for="name" class="col-sm-2 control-label"> VersionName: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter VersionName"/></div>
+		<label style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">VersionName Error</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="number" class="col-sm-2 control-label"> Number: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{number}" class="form-control" id="number" placeholder="Enter Number"/></div>
+		<label style="color:red" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number Error</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="fingerPrint" class="col-sm-2 control-label"> FingerPrint: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{fingerPrint}" class="form-control" id="fingerPrint" placeholder="Enter FingerPrint"/></div>
+		<label style="color:red" th:if="${#fields.hasErrors('fingerPrint')}" th:errors="*{fingerPrint}">FingerPrint Error</label>
+	</div>
+	
+	<div class="form-group">
+		<label for="releaseNote" class="col-sm-2 control-label"> ReleaseNote: </label>
+		<div class="col-sm-2"><input type="text" th:field="*{releaseNote}" class="form-control" id="releaseNote" placeholder="Enter ReleaseNote"/></div>
+	</div>
+	
+	<div class="form-group">
+		<div>
+			<button type="submit" class="btn btn-primary" id="btn">Submit</button>
+			<input type="reset" class="btn btn-warning" value="Reset" />
+			<a th:href="@{/product/__${version.productId}__}"><button type="button" class="btn btn-warning">Cancel</button></a>
+		</div>
+	</div>
+	
+</form>
+
+</body>
+</html>

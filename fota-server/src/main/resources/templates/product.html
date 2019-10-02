@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${product.name}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+</head>
+<body>
+
+<br><br>
+<h2 style="color:brown" th:text="@{Product : __${product.name}__}"></h2>
+<br><br>
+
+
+<table class="table table-bordered" style="width:800px">
+	<tr style="color:brown">
+		<th>OEM</th>
+		<th>Region</th>
+		<th>Operator</th>
+	</tr>
+	<tr>
+		<td th:text="${product.oem}"></td>
+		<td th:text="${product.region}"></td>
+		<td th:text="${product.operator}"></td>
+	</tr>
+</table>
+<br>
+<table class="table table-hover">
+	<tr style="color:green">
+		<th>ID</th>
+		<th>Version</th>
+		<th>Number</th>
+		<!-- <th>Status</th> -->
+	</tr>
+	<tr th:each="version : ${productVersions}">
+    	<td th:text="${version.id}"></td>
+		<td><a th:href="@{/version/__${version.id}__}" th:text="${version.name}"></a></td>
+		<td th:text="${version.number}"></td>
+		<!-- td th:text="${version.status}"></td-->
+	</tr>
+	<tr>
+		<td>   
+			<p><a th:href="@{/product/__${product.id}__/add_version}"><button type="button" class="btn btn-primary">Add Version</button></a></p>
+		</td>
+	</tr>
+</table>
+
+<!-- 
+<h4>
+	<span class="glyphicon glyphicon-saved"></span>
+	Insert into MySQL successfully!
+</h4> 
+-->
+
+<a href="/home"><button type="button" class="btn btn-warning">All Products</button></a>
+
+</body>
+</html>

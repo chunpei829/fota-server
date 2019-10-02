@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${version.name}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+</head>
+<body>
+
+<br><br>
+<h2 style="color:brown" th:text="@{Version : __${version.name}__}"></h2>
+<br><br>
+
+
+<table class="table table-bordered" style="width:800px">
+	<tr>
+		<th>Version</th>
+		<td th:text="${version.name}"></td>
+	</tr>
+	<tr>
+		<th>Number</th>
+		<td th:text="${version.number}"></td>
+	</tr>
+	<tr>
+		<th>Fingerprint</th>
+		<td th:text="${version.fingerPrint}"></td>
+	</tr>
+	<tr>
+		<th>ReleaeNote</th>
+		<td th:text="${version.releaseNote}"></td>
+	</tr>
+</table>
+<br>
+<hr>
+<h3 style="color:brown" th:text="@{OTA Settings}"></h3>
+<table class="table table-hover">
+	<tr style="color:green">
+		<th>SourceVersion</th>
+		<th>Status</th>
+		<th>FilePath</th>
+		<th>FileSize</th>
+		<th>MD5 sum</th>
+		<th>file manage</th>
+	</tr>
+	<tr th:each="delta : ${versionDeltas}">
+    	<td th:text="${delta.sourceVersionId}"></td>
+		<td th:text="${delta.status}"></td>
+		<td th:text="${delta.filePath}"></td>
+		<td th:text="${delta.fileSize}"></td>
+		<td th:text="${delta.md5Sum}"></td>
+		<td>
+			<form enctype="multipart/form-data" method="post" th:action="@{/delta/__${delta.id}__/upload_file}">
+				<input type="file" name="file"/>
+				<button type="submit" class="btn btn-primary" id="btn_upload">Upload</button>
+			</form>
+			<a th:href="@{/delta/__${delta.id}__/delete_file}"><button type="button" class="btn btn-warning">Delete</button></a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<form  class="form-horizontal" role="form" action="#" th:action="@{/version/__${version.id}__/delta_result}" th:object="${delta}" method="post">
+				<select th:field="*{sourceVersionId}" id="sourceVersionId">
+			        <option value="0">select source version</option>
+			        <option th:each="ver : ${versions}" th:text="${ver.name}" th:value="${ver.id}"></option>
+		      	</select>
+		      	<button type="submit" class="btn btn-primary" id="btn_add_delta">Add Delta</button>
+			</form>
+		</td>
+	</tr>
+	
+</table>
+
+<p><a th:href="@{/product/__${version.productId}__}"><button type="button" class="btn btn-warning">Back</button></a></p>
+
+</body>
+</html>

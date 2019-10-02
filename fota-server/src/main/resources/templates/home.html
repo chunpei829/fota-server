@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Arima FOTA server</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
+    </head>
+    <body>
+		<br><br>
+        <h2 style="color:green">Products</h2>
+		<br><br>
+        
+		<table class="table table-bordered table table-hover" style="width:800px">
+			<tr style="color:red">
+				<th>ID</th>
+				<th>OEM</th>
+				<th>PRODUCT</th>
+				<th>REGION</th>
+				<th>OPERATOR</th>
+			</tr>
+			<tr th:each="product : ${products}">
+		    	<td th:text="${product.id}"></td>
+				<td th:text="${product.oem}"></td>
+				<td><a th:href="@{/product/__${product.id}__}" th:text="${product.name}"></a></td>
+				<td th:text="${product.region}"></td>
+				<td th:text="${product.operator}"></td>
+			</tr>
+		</table>
+		        
+		<p>
+			<a href="/add_product"><button type="button" class="btn btn-primary">Add Product</button></a>
+		</p>
+        <p>
+        	<a th:href="@{/hello}"><button type="button" class="btn btn-primary">hello test</button></a>
+        </p>
+    </body>
+</html>
